@@ -51,8 +51,7 @@ public class Renodx5AddonService
         _dlssStreamlineService = dlssStreamlineService;
 
         _stagingDir    = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "RHI", "rdx5");
+            AppPaths.DataRoot, "rdx5");
         _versionFile   = Path.Combine(_stagingDir, "version.txt");
         _sfVersionFile = Path.Combine(_stagingDir, "version-sf.txt");
 

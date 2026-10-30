@@ -11,8 +11,7 @@ namespace RenoDXCommander.Services;
 public static class ShaderProfileService
 {
     private static readonly string FilePath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "shader_profiles.json");
+        AppPaths.DataRoot, "shader_profiles.json");
 
     private static readonly JsonSerializerOptions JsonOptions = new() { WriteIndented = true };
 

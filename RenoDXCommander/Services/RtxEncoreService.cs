@@ -47,8 +47,7 @@ public class RtxEncoreService
     };
 
     private static readonly string BaseStagingDir = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI");
+        AppPaths.DataRoot);
 
     private readonly string _stagingDir  = Path.Combine(BaseStagingDir, "rtx-encore");
     private readonly string _versionFile;

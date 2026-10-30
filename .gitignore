@@ -43,3 +43,6 @@ OptiScaler-DLSSNR-v*/
 # Claude Code personal settings (shared .claude/settings.json is committed)
 .claude/settings.local.json
 __pycache__/
+
+# Portable build output
+dist/

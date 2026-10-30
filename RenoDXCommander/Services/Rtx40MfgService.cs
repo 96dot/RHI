@@ -55,8 +55,7 @@ public class Rtx40MfgService
         _crashReporter = crashReporter;
         _etagCache     = etagCache;
         _stagingDir    = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "RHI", "rtx40mfg");
+            AppPaths.DataRoot, "rtx40mfg");
         _versionFile   = Path.Combine(_stagingDir, "version.txt");
 
         // One-time migration: wipe old ASI-based staging so new RTXMFG.dll will be downloaded

@@ -204,8 +204,7 @@ public partial class SettingsHandler
 
         // Check if a PAT file is active
         var patPath = System.IO.Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "RHI", "github_api.txt");
+            AppPaths.DataRoot, "github_api.txt");
         bool hasPat = System.IO.File.Exists(patPath);
 
         // Update the PAT status text to show file state
@@ -415,8 +414,7 @@ public partial class SettingsHandler
             try
             {
                 var path = System.IO.Path.Combine(
-                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                    "RHI", "github_api.txt");
+                    AppPaths.DataRoot, "github_api.txt");
                 System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path)!);
                 System.IO.File.WriteAllText(path, pat);
             }
@@ -455,8 +453,7 @@ public partial class SettingsHandler
         try
         {
             var path = System.IO.Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "RHI", "github_api.txt");
+                AppPaths.DataRoot, "github_api.txt");
             if (System.IO.File.Exists(path)) System.IO.File.Delete(path);
         }
         catch (Exception ex)

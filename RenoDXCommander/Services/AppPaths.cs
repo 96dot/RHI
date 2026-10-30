@@ -12,6 +12,19 @@ public static class AppPaths
     public static string ExeDir { get; } =
         Path.GetDirectoryName(Environment.ProcessPath) ?? AppContext.BaseDirectory;
 
+    /// <summary>
+    /// Portable data folder (settings, caches, logs, downloads): "Data" next to RHI.exe,
+    /// used in place of %LocalAppData%\RHI. Created on first use.
+    /// </summary>
+    public static string DataRoot { get; } = CreateDataRoot();
+
+    private static string CreateDataRoot()
+    {
+        var dir = Path.Combine(ExeDir, "Data");
+        Directory.CreateDirectory(dir);
+        return dir;
+    }
+
     /// <summary>Path of a file shipped next to RHI.exe.</summary>
     public static string InExeDir(string fileName) => Path.Combine(ExeDir, fileName);
 

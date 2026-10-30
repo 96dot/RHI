@@ -44,8 +44,7 @@ public class DlssNrCostScalerService
         _crashReporter = crashReporter;
         _etagCache     = etagCache;
         _stagingDir    = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "RHI", "dlssnr-cost-scaler");
+            AppPaths.DataRoot, "dlssnr-cost-scaler");
         _versionFile   = Path.Combine(_stagingDir, "version.txt");
     }
 

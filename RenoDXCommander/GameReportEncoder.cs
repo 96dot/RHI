@@ -18,8 +18,7 @@ namespace RenoDXCommander;
 public static class GameReportEncoder
 {
     private static readonly string ReportsDir = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "reports");
+        AppPaths.DataRoot, "reports");
 
     public static async Task ShowAndCopyAsync(XamlRoot xamlRoot, GameCardViewModel card, MainViewModel vm)
     {

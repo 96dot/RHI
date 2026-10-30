@@ -50,8 +50,7 @@ public static class AddonManagerDialog
 
         // Folder link at top
         var customFolderPath = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "RHI", "Custom", "Addons");
+            AppPaths.DataRoot, "Custom", "Addons");
         var folderLink = new HyperlinkButton
         {
             Content = "Place custom .addon64/.addon32 files here",

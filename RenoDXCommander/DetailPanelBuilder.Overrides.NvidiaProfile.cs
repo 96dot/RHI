@@ -489,8 +489,7 @@ public partial class DetailPanelBuilder
                             {
                                 // Fresh install — deploy custom file to game root
                                 var customSrc = Path.Combine(
-                                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                                    "RHI", "Custom", "DLSS", "nvngx_dlssnr.dll");
+                                    AppPaths.DataRoot, "Custom", "DLSS", "nvngx_dlssnr.dll");
                                 if (!File.Exists(customSrc))
                                 {
                                     _window.DispatcherQueue?.TryEnqueue(() => { deployNrBtn.Content = "Not in Custom/DLSS"; deployNrBtn.IsEnabled = true; });

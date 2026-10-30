@@ -106,8 +106,7 @@ public partial class DetailPanelBuilder
             else
             {
                 var nrDir = Path.Combine(
-                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                    "RHI", "DLSS-NR", StripVersionSuffix(nrSelVer!));
+                    AppPaths.DataRoot, "DLSS-NR", StripVersionSuffix(nrSelVer!));
                 cachedNrFeeder = ResolveCachedNrDllPath(nrSelVer!) ?? Path.Combine(nrDir, "nvngx_dlssnr.dll");
                 if (!File.Exists(cachedNrFeeder))
                     cachedNrFeeder = await dlssSvc.EnsureSpecificDlssnrCachedAsync(nrSelVer!).ConfigureAwait(false)
@@ -202,8 +201,7 @@ public partial class DetailPanelBuilder
             {
                 // Try to extract from the staged feeder addon zip (versioned or latest)
                 var feederZipDir = System.IO.Path.Combine(
-                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                    "RHI", "rdx5", "feeder");
+                    AppPaths.DataRoot, "rdx5", "feeder");
                 var feederZip = Directory.Exists(feederZipDir)
                     ? Directory.GetFiles(feederZipDir, "*.zip", SearchOption.AllDirectories)
                           .OrderByDescending(f => File.GetLastWriteTimeUtc(f))
@@ -513,7 +511,7 @@ public partial class DetailPanelBuilder
                             cachedNrHost = await dlssSvc.EnsureNewestDlssnrCachedAsync().ConfigureAwait(false);
                         else
                         {
-                            var nrDirHost = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RHI", "DLSS-NR", StripVersionSuffix(nrSelVerHost!));
+                            var nrDirHost = Path.Combine(AppPaths.DataRoot, "DLSS-NR", StripVersionSuffix(nrSelVerHost!));
                             cachedNrHost = ResolveCachedNrDllPath(nrSelVerHost!) ?? Path.Combine(nrDirHost, "nvngx_dlssnr.dll");
                             if (!File.Exists(cachedNrHost)) cachedNrHost = await dlssSvc.EnsureSpecificDlssnrCachedAsync(nrSelVerHost!).ConfigureAwait(false)
                                                                           ?? await dlssSvc.EnsureNewestDlssnrCachedAsync().ConfigureAwait(false);

@@ -268,8 +268,7 @@ public sealed partial class MainWindow
 
             // ── Default preset buttons ────────────────────────────────────────────
             var defaultsPath = System.IO.Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "RHI", "rtx_hdr_defaults.json");
+                AppPaths.DataRoot, "rtx_hdr_defaults.json");
 
             // Load current defaults (if any) to show whether "Set Default" is available
             bool hasDefaults = File.Exists(defaultsPath);

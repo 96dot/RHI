@@ -41,8 +41,7 @@ public class NexusUpdateService : INexusUpdateService
     public Dictionary<string, string> ModSummaries { get; } = new(StringComparer.OrdinalIgnoreCase);
 
     private static readonly string BaselinesPath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "nexus_baselines.json");
+        AppPaths.DataRoot, "nexus_baselines.json");
 
     private static readonly Regex NexusUrlPattern = new(
         @"nexusmods\.com/([^/]+)/mods/(\d+)",

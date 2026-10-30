@@ -10,8 +10,7 @@ namespace RenoDXCommander.Services;
 public static class OsPresetService
 {
     private static readonly string FilePath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "os_presets.json");
+        AppPaths.DataRoot, "os_presets.json");
 
     private static readonly JsonSerializerOptions JsonOptions = new() { WriteIndented = true };
 

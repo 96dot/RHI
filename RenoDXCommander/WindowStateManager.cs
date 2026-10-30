@@ -32,8 +32,7 @@ public class WindowStateManager
     private int _unexpectedWmAppCount;
 
     private static readonly string _windowSettingsPath = System.IO.Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "window_main.json");
+        AppPaths.DataRoot, "window_main.json");
 
     // In-memory cache of window bounds (populated from file on first restore)
     private (int X, int Y, int W, int H)? _windowBounds;

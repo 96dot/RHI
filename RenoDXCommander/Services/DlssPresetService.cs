@@ -420,6 +420,11 @@ public partial class DlssPresetService
     /// </summary>
     public void Initialize()
     {
+        if (!FeatureFlags.NvidiaFeatures)
+        {
+            CrashReporter.Log("[DlssPresetService.Initialize] NVIDIA features removed in this build — NVAPI not loaded");
+            return;
+        }
         try
         {
             var handle = LoadLibrary("nvapi64.dll");

@@ -35,8 +35,7 @@ public class DofFixService : IDofFixService
         _etagCache = etagCache;
         _crashReporter = crashReporter;
         _stagingDir = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "RHI", "ue-dof-fix");
+            AppPaths.DataRoot, "ue-dof-fix");
         _versionFile = Path.Combine(_stagingDir, "version.txt");
     }
 

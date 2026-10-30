@@ -34,6 +34,12 @@ public static class FeatureFlags
     public static bool NexusMods
         => DevUnlockService.IsUnlocked || _manifestFlags?.NexusMods == true;
 
+    /// <summary>
+    /// Fork switch: NVIDIA driver profiles, DLSS / Streamline management, Neural Rendering,
+    /// MFG / RTX unlocks and NVIDIA display tools. When false their UI is hidden and NVAPI is never loaded.
+    /// </summary>
+    public static bool NvidiaFeatures => false;
+
     /// <summary>Resolution auto-toggle feature (Settings card + per-game toggle).</summary>
     public static bool ResolutionControl => true;
 }

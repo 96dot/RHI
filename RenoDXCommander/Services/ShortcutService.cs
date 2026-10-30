@@ -93,8 +93,7 @@ public static class ShortcutService
             var lnkPath    = Path.Combine(desktop, $"{safeName}.lnk");
 
             var iconDir = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "RHI", "ShortcutIcons");
+                AppPaths.DataRoot, "ShortcutIcons");
             Directory.CreateDirectory(iconDir);
 
             string? iconPath = null;

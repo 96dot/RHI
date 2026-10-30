@@ -22,8 +22,7 @@ public partial class DialogService
     private readonly IHdrDatabaseService _hdrDatabaseService;
 
     private static readonly string PatchNotesDir = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI");
+        AppPaths.DataRoot);
 
     public DialogService(MainWindow window)
     {

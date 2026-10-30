@@ -15,23 +15,19 @@ public class AddonPackService : IAddonPackService
         "https://raw.githubusercontent.com/crosire/reshade-shaders/list/Addons.ini";
 
     private static readonly string StagingDir =
-        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "RHI", "addons");
+        Path.Combine(AppPaths.DataRoot, "addons");
 
     private static readonly string CachePath =
-        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "RHI", "addons_cache.ini");
+        Path.Combine(AppPaths.DataRoot, "addons_cache.ini");
 
     private static readonly string VersionsJsonPath =
         Path.Combine(StagingDir, "versions.json");
 
     private static readonly string DeploymentsJsonPath =
-        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "RHI", "addon_deployments.json");
+        Path.Combine(AppPaths.DataRoot, "addon_deployments.json");
 
     private static readonly string CustomAddonsDir =
-        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "RHI", "Custom", "Addons");
+        Path.Combine(AppPaths.DataRoot, "Custom", "Addons");
 
     private readonly HttpClient _http;
     private List<AddonEntry> _packs = new();
@@ -243,8 +239,7 @@ public class AddonPackService : IAddonPackService
             try
             {
                 var libPath = Path.Combine(
-                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                    "RHI", "game_library.json");
+                    AppPaths.DataRoot, "game_library.json");
                 if (File.Exists(libPath))
                 {
                     var libJson = File.ReadAllText(libPath);

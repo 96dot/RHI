@@ -208,7 +208,8 @@ public partial class SettingsHandler
                 }
 
                 // Initialize DLDSR Control
-                InitDldsrControl();
+                if (FeatureFlags.NvidiaFeatures)
+                    InitDldsrControl();
             }
 
             // Populate DLSS defaults summary
@@ -395,12 +396,12 @@ public partial class SettingsHandler
                         await System.Threading.Tasks.Task.Delay(5_000).ConfigureAwait(false);
 
                         var restartLogPath = System.IO.Path.Combine(
-                            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RHI", "restart_log.txt");
+                            AppPaths.DataRoot, "restart_log.txt");
                         var now = DateTime.UtcNow;
                         try { System.IO.File.AppendAllText(restartLogPath, now.ToString("O") + Environment.NewLine); } catch (Exception) { /* best-effort restart log; process exits immediately after */ }
 
                         var uncleanMarkerPath = System.IO.Path.Combine(
-                            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RHI", "rhi_unclean_restart");
+                            AppPaths.DataRoot, "rhi_unclean_restart");
                         try { System.IO.File.WriteAllText(uncleanMarkerPath, now.ToString("O")); } catch (Exception) { /* best-effort unclean-restart marker; process exits immediately after */ }
 
                         CrashReporter.LogSync("[FreezeDiag] Test Fast Restart: executing restart now");

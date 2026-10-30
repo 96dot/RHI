@@ -42,8 +42,7 @@ public partial class DetailPanelBuilder
     private static string? ResolveCachedNrDllPath(string versionString)
     {
         var nrBase = System.IO.Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "RHI", "DLSS-NR");
+            AppPaths.DataRoot, "DLSS-NR");
         if (!Directory.Exists(nrBase)) return null;
 
         var stripped = StripVersionSuffix(versionString);

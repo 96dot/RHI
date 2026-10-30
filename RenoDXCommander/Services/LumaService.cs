@@ -16,8 +16,7 @@ public class LumaService : ILumaService
     private const string WikiUrl = "https://github.com/Filoppi/Luma-Framework/wiki";
 
     private static readonly string DbPath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "luma_installed.json");
+        AppPaths.DataRoot, "luma_installed.json");
 
     private readonly HttpClient _http;
     private readonly GitHubETagCache _etagCache;

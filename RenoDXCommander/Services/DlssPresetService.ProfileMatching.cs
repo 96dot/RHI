@@ -201,8 +201,7 @@ public partial class DlssPresetService
     // null value = confirmed no profile found (also cached to avoid re-scanning).
 
     private static readonly string ProfileNameCachePath =
-        Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "RHI", "nvidia_profile_cache.json");
+        Path.Combine(AppPaths.DataRoot, "nvidia_profile_cache.json");
 
     private Dictionary<string, string?>? _persistentProfileNameCache;
 

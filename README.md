@@ -1,5 +1,7 @@
 # RHI — ReShade HDR Installer
 
+> **About this fork (96dot/RHI):** NVIDIA features are removed: driver profile and Global NVIDIA Driver settings, RTX HDR, DLSS / Streamline management, Neural Rendering, MFG / RTX unlocks, DLDSR and NVIDIA colour/vibrance tools. NVAPI is never loaded. It is a portable build: run `publish-portable.bat`, then use `dist\RHI-Portable\RHI.exe` from any folder. Settings, caches, logs and downloads live in `Data\` next to the exe. Self-update is off, so it never installs upstream releases over this fork. All of this is controlled by `FeatureFlags.NvidiaFeatures` in `RenoDXCommander/Services/FeatureFlags.cs`.
+
 **HDR mods, ReShade, DLSS and NVIDIA driver settings for your whole PC game library, from one window.**
 
 RHI finds your games across eight storefronts, then installs, updates and removes ReShade, RenoDX and Luma HDR mods, frame limiters, DLSS/Streamline files, OptiScaler, Neural Rendering tools and more, with per-game control over every one of them.

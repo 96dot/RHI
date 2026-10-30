@@ -11,8 +11,7 @@ namespace RenoDXCommander.Services;
 public class SeenWikiModsService
 {
     private static readonly string FilePath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "seen_wiki_mods.json");
+        AppPaths.DataRoot, "seen_wiki_mods.json");
 
     private HashSet<string> _seenMods = new(StringComparer.OrdinalIgnoreCase);
     private bool _loaded;

@@ -43,8 +43,7 @@ public class DlssEnablerService
         _optiScalerService = optiScalerService;
 
         _stagingDir = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "RHI", "optiDE");
+            AppPaths.DataRoot, "optiDE");
         _versionFile = Path.Combine(_stagingDir, "version.txt");
     }
 

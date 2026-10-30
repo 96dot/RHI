@@ -632,8 +632,7 @@ public partial class DetailPanelBuilder
                         else
                         {
                             var nrDir = Path.Combine(
-                                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                                "RHI", "DLSS-NR", StripVersionSuffix(sel!));
+                                AppPaths.DataRoot, "DLSS-NR", StripVersionSuffix(sel!));
                             cachedNr = ResolveCachedNrDllPath(sel!) ?? Path.Combine(nrDir, "nvngx_dlssnr.dll");
                             if (!File.Exists(cachedNr))
                                 cachedNr = await dlssSvc.EnsureSpecificDlssnrCachedAsync(sel!).ConfigureAwait(false)

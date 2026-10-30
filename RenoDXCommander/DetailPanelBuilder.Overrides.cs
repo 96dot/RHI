@@ -1227,12 +1227,15 @@ public partial class DetailPanelBuilder
         // Sync mutable state back from context
         capturedName = ctx.CapturedName;
 
-        BuildNeuralRenderingSection(card);
-        CrashReporter.Log($"[BuildOverridesPanel] NeuralRendering done: '{card.GameName}'");
-        BuildNvidiaProfileSection(card, capturedName);
-        CrashReporter.Log($"[BuildOverridesPanel] NvidiaProfileDlss done: '{card.GameName}'");
-        BuildDriverProfileSection(card, capturedName);
-        CrashReporter.Log($"[BuildOverridesPanel] NvidiaProfileDriver done: '{card.GameName}'");
+        if (FeatureFlags.NvidiaFeatures)
+        {
+            BuildNeuralRenderingSection(card);
+            CrashReporter.Log($"[BuildOverridesPanel] NeuralRendering done: '{card.GameName}'");
+            BuildNvidiaProfileSection(card, capturedName);
+            CrashReporter.Log($"[BuildOverridesPanel] NvidiaProfileDlss done: '{card.GameName}'");
+            BuildDriverProfileSection(card, capturedName);
+            CrashReporter.Log($"[BuildOverridesPanel] NvidiaProfileDriver done: '{card.GameName}'");
+        }
 
         BuildManagementSection(card, capturedName, ctx);
         CrashReporter.Log($"[BuildOverridesPanel] Dxvk+Management done: '{card.GameName}'");

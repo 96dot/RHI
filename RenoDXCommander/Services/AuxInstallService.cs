@@ -49,22 +49,19 @@ public partial class AuxInstallService : IAuxInstallService, IAuxFileService
 
     // Staging folder: %LocalAppData%\RenoDXCommander\reshade\
     public static readonly string RsStagingDir = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "reshade");
+        AppPaths.DataRoot, "reshade");
     public static string RsStagedPath64 => Path.Combine(RsStagingDir, RsStaged64);
     public static string RsStagedPath32 => Path.Combine(RsStagingDir, RsStaged32);
 
     // Nightly (addon) ReShade staging folder: %LocalAppData%\RHI\reshade-nightly\
     public static readonly string RsNightlyStagingDir = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "reshade-nightly");
+        AppPaths.DataRoot, "reshade-nightly");
     public static string RsNightlyStagedPath64 => Path.Combine(RsNightlyStagingDir, RsStaged64);
     public static string RsNightlyStagedPath32 => Path.Combine(RsNightlyStagingDir, RsStaged32);
 
     // Legacy ReShade staging base folder: %LocalAppData%\RHI\LegacyReshade\
     public static readonly string RsLegacyStagingBaseDir = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "LegacyReshade");
+        AppPaths.DataRoot, "LegacyReshade");
 
     /// <summary>
     /// Returns the staged DLL path for a legacy ReShade version.
@@ -99,8 +96,7 @@ public partial class AuxInstallService : IAuxInstallService, IAuxFileService
 
     // Normal (non-addon) ReShade staging folder: %LocalAppData%\RHI\reshade-normal\
     public static readonly string RsNormalStagingDir = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "reshade-normal");
+        AppPaths.DataRoot, "reshade-normal");
     public static string RsNormalStagedPath64 => Path.Combine(RsNormalStagingDir, RsStaged64);
     public static string RsNormalStagedPath32 => Path.Combine(RsNormalStagingDir, RsStaged32);
 
@@ -165,8 +161,7 @@ public partial class AuxInstallService : IAuxInstallService, IAuxFileService
 
     // ── Infrastructure ────────────────────────────────────────────────────────────
     private static readonly string DbPath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "aux_installed.json");
+        AppPaths.DataRoot, "aux_installed.json");
 
     // ── INI preset folder ─────────────────────────────────────────────────────────
     /// <summary>
@@ -174,8 +169,7 @@ public partial class AuxInstallService : IAuxInstallService, IAuxFileService
     /// Place reshade.ini here to enable the 📋 INI button on the ReShade row.
     /// </summary>
     public static readonly string InisDir = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "inis");
+        AppPaths.DataRoot, "inis");
 
     public static string RsIniPath => Path.Combine(InisDir, "reshade.ini");
     public static string RsVulkanIniPath => Path.Combine(InisDir, "reshade.vulkan.ini");

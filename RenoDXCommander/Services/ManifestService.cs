@@ -29,8 +29,7 @@ public class ManifestService : IManifestService
         "https://raw.githubusercontent.com/RankFTW/RHI/main/manifest.json";
 
     private static readonly string CachePath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "manifest.json");
+        AppPaths.DataRoot, "manifest.json");
 
     private static readonly JsonSerializerOptions JsonOptions = new()
     {

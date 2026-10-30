@@ -66,6 +66,7 @@ public static class DigitalVibranceService
     {
         if (_initialized) return;
         _initialized = true;
+        if (!FeatureFlags.NvidiaFeatures) return;
 
         try
         {

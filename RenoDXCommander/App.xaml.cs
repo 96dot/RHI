@@ -184,8 +184,7 @@ public partial class App : Application
 
         // Also check for signal file (used when Admin Mode relaunches via scheduled task)
         var minimizedSignalPath = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "RHI", "rhi_start_minimized");
+            AppPaths.DataRoot, "rhi_start_minimized");
         if (File.Exists(minimizedSignalPath))
         {
             startMinimized = true;
@@ -230,7 +229,7 @@ public partial class App : Application
         }
 
         // Only the owning instance may migrate shared application data.
-        MigrateLegacyAppData();
+        // Portable build: data lives beside the exe, so legacy %LocalAppData% folders are left alone.
         DownloadsMigrationService.RunOnce();
 
         // Store pending launch for after window initializes
@@ -248,7 +247,7 @@ public partial class App : Application
                 // Pass minimized flag via signal file (schtasks /Run doesn't support extra args)
                 if (startMinimized)
                 {
-                    var signalDir = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RHI");
+                    var signalDir = Path.Combine(AppPaths.DataRoot);
                     Directory.CreateDirectory(signalDir);
                     File.WriteAllText(Path.Combine(signalDir, "rhi_start_minimized"), "");
                 }
@@ -404,56 +403,6 @@ public partial class App : Application
         }
         if (_window is MainWindow mw2)
             mw2.DispatcherQueue.TryEnqueue(() => mw2.HandleAddonFile(path));
-    }
-
-    /// <summary>
-    /// Migrates legacy %LocalAppData% folders to %LocalAppData%\RHI.
-    /// Handles the original RenoDXCommander folder and the UPST folder.
-    /// Copies all contents then deletes the old folder. Runs once per legacy folder.
-    /// </summary>
-    private static void MigrateLegacyAppData()
-    {
-        try
-        {
-            var localAppData = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-            var newDir = Path.Combine(localAppData, "RHI");
-
-            // Migrate from RenoDXCommander (oldest) first, then UPST
-            foreach (var legacyName in new[] { "RenoDXCommander", "UPST" })
-            {
-                var legacyDir = Path.Combine(localAppData, legacyName);
-                if (!Directory.Exists(legacyDir))
-                    continue;
-
-                CrashReporter.Log($"[App.MigrateLegacyAppData] Migrating {legacyDir} → {newDir}");
-                CopyDirectoryRecursive(legacyDir, newDir);
-                Directory.Delete(legacyDir, recursive: true);
-                CrashReporter.Log($"[App.MigrateLegacyAppData] Migration from {legacyName} complete");
-            }
-        }
-        catch (Exception ex)
-        {
-            // Migration failure is non-fatal — the app will recreate files as needed
-            CrashReporter.Log($"[App.MigrateLegacyAppData] Migration failed — {ex.Message}");
-        }
-    }
-
-    private static void CopyDirectoryRecursive(string sourceDir, string destDir)
-    {
-        Directory.CreateDirectory(destDir);
-
-        foreach (var file in Directory.GetFiles(sourceDir))
-        {
-            var destFile = Path.Combine(destDir, Path.GetFileName(file));
-            // Don't overwrite if the new folder already has the file (e.g. partial previous migration)
-            if (!File.Exists(destFile))
-                File.Copy(file, destFile);
-        }
-
-        foreach (var dir in Directory.GetDirectories(sourceDir))
-        {
-            CopyDirectoryRecursive(dir, Path.Combine(destDir, Path.GetFileName(dir)));
-        }
     }
 
     private static bool IsRunningAsAdmin()

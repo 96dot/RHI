@@ -785,6 +785,7 @@ public sealed partial class MainWindow
             // autoHdrCombo is declared here at method scope so the RTX HDR SelectionChanged
             // handler can reference it for mutual exclusivity (before the Auto HDR section builds it).
             ComboBox? autoHdrCombo = null;
+            int rtxHdrUiStart = content.Children.Count;
             content.Children.Add(new Border { Height = 1, Background = UIFactory.Brush(ResourceKeys.BorderDefaultBrush), Margin = new Thickness(0, 10, 0, 2) });
             content.Children.Add(new TextBlock
             {
@@ -930,6 +931,10 @@ public sealed partial class MainWindow
             });
             rtxHdrRow.Children.Add(rtxHdrCombo);
             content.Children.Add(rtxHdrRow);
+            // NVIDIA features removed in this fork: drop the RTX HDR controls built above.
+            if (!FeatureFlags.NvidiaFeatures)
+                while (content.Children.Count > rtxHdrUiStart)
+                    content.Children.RemoveAt(rtxHdrUiStart);
 
             // ── Auto HDR Toggle ────────────────────────────────────────────────────
             content.Children.Add(new Border { Height = 1, Background = UIFactory.Brush(ResourceKeys.BorderDefaultBrush), Margin = new Thickness(0, 10, 0, 2) });

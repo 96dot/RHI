@@ -15,8 +15,7 @@ public class NexusModsService : INexusModsService
     private const string GamesJsonUrl = "https://data.nexusmods.com/file/nexus-data/games.json";
 
     private static readonly string CachePath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "nexus_games.json");
+        AppPaths.DataRoot, "nexus_games.json");
 
     private static readonly TimeSpan CacheTtl = TimeSpan.FromHours(24);
 

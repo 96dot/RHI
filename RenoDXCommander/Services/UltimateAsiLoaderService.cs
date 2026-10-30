@@ -73,9 +73,8 @@ public class UltimateAsiLoaderService
         _crashReporter = crashReporter;
         _auxInstaller  = auxInstaller;
 
-        var appData    = Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData);
-        _stagingDir32  = Path.Combine(appData, "RHI", "ual");
-        _stagingDir64  = Path.Combine(appData, "RHI", "ual64");
+        _stagingDir32  = Path.Combine(AppPaths.DataRoot, "ual");
+        _stagingDir64  = Path.Combine(AppPaths.DataRoot, "ual64");
         _versionFile32 = Path.Combine(_stagingDir32, "version.txt");
         _versionFile64 = Path.Combine(_stagingDir64, "version.txt");
     }

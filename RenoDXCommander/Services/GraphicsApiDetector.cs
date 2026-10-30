@@ -18,7 +18,7 @@ public static class GraphicsApiDetector
     private static readonly ConcurrentDictionary<string, HashSet<GraphicsApiType>> _apiCache = new(StringComparer.OrdinalIgnoreCase);
 
     private static string CacheFilePath => Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RHI", "api_cache.json");
+        AppPaths.DataRoot, "api_cache.json");
 
     /// <summary>
     /// Builds a cache key that includes the file's last write time so stale entries

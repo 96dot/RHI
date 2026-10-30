@@ -329,8 +329,7 @@ public partial class SettingsHandler
     public void OpenLogsFolder_Click(object sender, RoutedEventArgs e)
     {
         var logsDir = System.IO.Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "RHI", "logs");
+            AppPaths.DataRoot, "logs");
         System.IO.Directory.CreateDirectory(logsDir);
         CrashReporter.Log("[SettingsHandler.OpenLogsFolder_Click] User opened logs folder");
         System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(logsDir) { UseShellExecute = true });
@@ -512,7 +511,7 @@ public partial class SettingsHandler
     public void OpenAppDataFolder_Click(object sender, RoutedEventArgs e)
     {
         var appDataDir = System.IO.Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RHI");
+            AppPaths.DataRoot);
         System.IO.Directory.CreateDirectory(appDataDir);
         CrashReporter.Log("[SettingsHandler.OpenAppDataFolder_Click] User opened AppData folder");
         System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(appDataDir) { UseShellExecute = true });
@@ -521,7 +520,7 @@ public partial class SettingsHandler
     public void OpenCustomFolder_Click(object sender, RoutedEventArgs e)
     {
         var customDir = System.IO.Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RHI", "Custom");
+            AppPaths.DataRoot, "Custom");
         System.IO.Directory.CreateDirectory(customDir);
         CrashReporter.Log("[SettingsHandler.OpenCustomFolder_Click] User opened Custom folder");
         System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo(customDir) { UseShellExecute = true });

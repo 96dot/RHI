@@ -22,8 +22,7 @@ public class DgVoodooService
     private const string ConfFile    = "dgVoodoo.conf";
 
     private static readonly string CacheDir = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "dgvoodoo");
+        AppPaths.DataRoot, "dgvoodoo");
 
     private readonly HttpClient _http;
 

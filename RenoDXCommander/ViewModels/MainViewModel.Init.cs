@@ -206,8 +206,7 @@ public partial class MainViewModel
         // Check for unclean-restart marker — written by auto-restart before Environment.Exit(2).
         // Presence means the previous session ended with a UI freeze, not a clean user close.
         var uncleanMarkerPath = System.IO.Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "RHI", "rhi_unclean_restart");
+            AppPaths.DataRoot, "rhi_unclean_restart");
         if (System.IO.File.Exists(uncleanMarkerPath))
         {
             string markerContent = "";
@@ -220,8 +219,7 @@ public partial class MainViewModel
         // Check for pending-dump marker — written by the dump task before MiniDumpWriteDump starts.
         // If present, the previous session froze and wrote (or attempted) a dump. Log path and size.
         var pendingDumpMarker = System.IO.Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "RHI", "rhi_pending_dump");
+            AppPaths.DataRoot, "rhi_pending_dump");
         if (System.IO.File.Exists(pendingDumpMarker))
         {
             string dumpInfo = "";

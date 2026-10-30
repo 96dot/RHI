@@ -314,8 +314,7 @@ public sealed partial class MainWindow : Window
         _shutdownSignalTimer.Tick += (_, _) =>
         {
             var signalPath = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "RHI", "rhi_shutdown_requested");
+                AppPaths.DataRoot, "rhi_shutdown_requested");
             if (File.Exists(signalPath))
             {
                 try { File.Delete(signalPath); } catch (Exception) { /* Safe to ignore: timer tick; failing to delete the signal file is harmless because the app exits immediately after. */ }
@@ -704,9 +703,12 @@ public sealed partial class MainWindow : Window
                                 BuildOverridesPanel(target);
                                 _crashReporter?.Log($"[SelectionDebounce] BuildOverridesPanel done: '{target.GameName}'");
                                 if (OverridesContainer.Visibility != Visibility.Visible)        OverridesContainer.Visibility = Visibility.Visible;
-                                if (NeuralRenderingContainer.Visibility != Visibility.Visible)  NeuralRenderingContainer.Visibility = Visibility.Visible;
-                                if (NvidiaProfileDlssContainer.Visibility != Visibility.Visible)   NvidiaProfileDlssContainer.Visibility = Visibility.Visible;
-                                if (NvidiaProfileDriverContainer.Visibility != Visibility.Visible) NvidiaProfileDriverContainer.Visibility = Visibility.Visible;
+                                if (FeatureFlags.NvidiaFeatures)
+                                {
+                                    if (NeuralRenderingContainer.Visibility != Visibility.Visible)  NeuralRenderingContainer.Visibility = Visibility.Visible;
+                                    if (NvidiaProfileDlssContainer.Visibility != Visibility.Visible)   NvidiaProfileDlssContainer.Visibility = Visibility.Visible;
+                                    if (NvidiaProfileDriverContainer.Visibility != Visibility.Visible) NvidiaProfileDriverContainer.Visibility = Visibility.Visible;
+                                }
                                 if (ManagementContainer.Visibility != Visibility.Visible)       ManagementContainer.Visibility = Visibility.Visible;
                                 _detailPanelBuilder.ApplySectionOrder();
                                 _crashReporter?.Log($"[SelectionDebounce] ApplySectionOrder done: '{target.GameName}'");

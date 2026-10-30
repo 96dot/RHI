@@ -719,8 +719,7 @@ public sealed partial class MainWindow
 
             var json = System.Text.Json.JsonSerializer.Serialize(data, new System.Text.Json.JsonSerializerOptions { WriteIndented = true });
             var path = System.IO.Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "RHI", "nvidia_profiles_backup.json");
+                AppPaths.DataRoot, "nvidia_profiles_backup.json");
             System.IO.Directory.CreateDirectory(System.IO.Path.GetDirectoryName(path)!);
             System.IO.File.WriteAllText(path, json);
 
@@ -752,8 +751,7 @@ public sealed partial class MainWindow
         try
         {
             var path = System.IO.Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "RHI", "nvidia_profiles_backup.json");
+                AppPaths.DataRoot, "nvidia_profiles_backup.json");
 
             if (!System.IO.File.Exists(path))
             {

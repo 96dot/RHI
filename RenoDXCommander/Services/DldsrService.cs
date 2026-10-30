@@ -100,8 +100,7 @@ public class DldsrService : IDldsrService
     };
 
     public string CapturesFilePath => Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "dldsr-captures.json");
+        AppPaths.DataRoot, "dldsr-captures.json");
 
     // ── State Reading ─────────────────────────────────────────────────────────
 

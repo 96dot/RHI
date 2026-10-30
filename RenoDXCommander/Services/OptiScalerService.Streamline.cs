@@ -11,8 +11,7 @@ public partial class OptiScalerService
     /// Mirrors the private StreamlineCacheDir in DlssStreamlineService.
     /// </summary>
     public static string StreamlineStagingFolder => Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "Streamline");
+        AppPaths.DataRoot, "Streamline");
 
     /// <summary>
     /// Copies all files from the specified Streamline version subfolder to

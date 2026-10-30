@@ -20,8 +20,7 @@ public class ModInstallService : IModInstallService
     public event Action<InstalledModRecord>? InstallCompleted;
 
     private static readonly string DbPath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "installed.json");
+        AppPaths.DataRoot, "installed.json");
 
     private readonly HttpClient _http;
 
@@ -546,8 +545,7 @@ public class ModInstallService : IModInstallService
         }
 
         private static readonly string FilePath = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "RHI", "renodx_snapshot_etags.json");
+            AppPaths.DataRoot, "renodx_snapshot_etags.json");
 
         public static Entry? Get(string url)
         {

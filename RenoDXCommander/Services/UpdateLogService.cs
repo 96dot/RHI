@@ -13,8 +13,7 @@ public class UpdateLogService : IUpdateLogService
     private const int MaxEntries = 200;
 
     private static readonly string FilePath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "update_log.json");
+        AppPaths.DataRoot, "update_log.json");
 
     private static readonly JsonSerializerOptions JsonOptions = new()
     {

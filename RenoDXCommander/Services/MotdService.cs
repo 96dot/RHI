@@ -11,8 +11,7 @@ public static class MotdService
 {
     private const string MotdUrl = "https://raw.githubusercontent.com/RankFTW/RHI/main/motd.md";
     private static readonly string HashPath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "motd_hash.txt");
+        AppPaths.DataRoot, "motd_hash.txt");
 
     /// <summary>
     /// Fetches the MOTD and returns the content if it's new (not yet shown to this user).

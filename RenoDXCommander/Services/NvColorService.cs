@@ -130,7 +130,7 @@ public static class NvColorService
     private static bool EnsureInit()
     {
         if (_initialized) return true;
-        if (_initFailed)  return false;
+        if (_initFailed || !FeatureFlags.NvidiaFeatures) return false;
         try
         {
             var colorControlPtr = NvAPI_QueryInterface(NVAPI_DISP_COLOR_CONTROL_ID);

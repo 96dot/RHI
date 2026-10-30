@@ -1707,7 +1707,7 @@ public partial class AuxInstallService
 
     private const string EngineIniFilesBaseUrl = "https://raw.githubusercontent.com/RankFTW/rhi-repo/main/engine-files/";
     private static readonly string EngineIniFilesCacheDir = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RHI", "engine-files");
+        AppPaths.DataRoot, "engine-files");
 
     /// <summary>
     /// Fetches a custom Engine.ini file from the rhi-repo engine-files/ folder.

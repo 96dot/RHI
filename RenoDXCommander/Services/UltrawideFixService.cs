@@ -28,7 +28,7 @@ public partial class UltrawideFixService : IUltrawideFixService
 
     // ── Cache paths ───────────────────────────────────────────────────────────
     private static readonly string CacheDir = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RHI");
+        AppPaths.DataRoot);
     private static readonly string LyallCachePath = Path.Combine(CacheDir, "lyall_repos.json");
     private static readonly string RoseCachePath  = Path.Combine(CacheDir, "rose_uw_readme.md");
     private static readonly string P1xelCachePath = Path.Combine(CacheDir, "p1xel_uw_readme.md");

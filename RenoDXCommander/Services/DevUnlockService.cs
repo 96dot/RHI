@@ -10,8 +10,7 @@ namespace RenoDXCommander.Services;
 public static class DevUnlockService
 {
     private static readonly string UnlockFilePath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "unlock.txt");
+        AppPaths.DataRoot, "unlock.txt");
 
     /// <summary>
     /// Dedicated GitHub API token file — any user can place their token here to raise
@@ -21,8 +20,7 @@ public static class DevUnlockService
     /// Path: %LocalAppData%\RHI\github_api.txt
     /// </summary>
     private static readonly string GitHubApiTokenFilePath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "github_api.txt");
+        AppPaths.DataRoot, "github_api.txt");
 
     private static bool? _isUnlocked;
 

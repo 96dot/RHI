@@ -702,8 +702,7 @@ public partial class OptiScalerService
     public static string? GetStagedDlssPath()
     {
         var newCacheDir = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "RHI", "DLSS");
+            AppPaths.DataRoot, "DLSS");
         return FindNewestDllInCache(newCacheDir, DlssDllFileName);
     }
 
@@ -714,8 +713,7 @@ public partial class OptiScalerService
     public static string? GetStagedDlssdPath()
     {
         var newCacheDir = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "RHI", "DLSS-D");
+            AppPaths.DataRoot, "DLSS-D");
         return FindNewestDllInCache(newCacheDir, DlssdDllFileName);
     }
 
@@ -726,8 +724,7 @@ public partial class OptiScalerService
     public static string? GetStagedDlssgPath()
     {
         var newCacheDir = Path.Combine(
-            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-            "RHI", "DLSS-G");
+            AppPaths.DataRoot, "DLSS-G");
         return FindNewestDllInCache(newCacheDir, DlssgDllFileName);
     }
 

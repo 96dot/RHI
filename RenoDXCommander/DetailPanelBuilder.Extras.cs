@@ -72,11 +72,11 @@ public partial class DetailPanelBuilder
         bool dgvInstalled = !string.IsNullOrEmpty(installPath) && dgSvc.IsDeployed(installPath);
         var exSummaryEntries = new List<(string, string?)>();
         if (!string.IsNullOrEmpty(vm.GetUalInstalledAs(gn, gs)))                           exSummaryEntries.Add(("ASI Loader", vm.GetUalInstalledAs(gn, gs)));
-        if (vm.GetRtx40MfgInstalled(gn, gs))                                               exSummaryEntries.Add(("RTX 40 MFG", "On"));
-        if (card.MfgAdaInstalled)                                                          exSummaryEntries.Add(("MFG Ada", "On"));
-        if (vm.GetDlssg2030Installed(gn, gs))                                              exSummaryEntries.Add(("20/30 FG", "On"));
+        if (FeatureFlags.NvidiaFeatures && vm.GetRtx40MfgInstalled(gn, gs))                                               exSummaryEntries.Add(("RTX 40 MFG", "On"));
+        if (FeatureFlags.NvidiaFeatures && card.MfgAdaInstalled)                                                          exSummaryEntries.Add(("MFG Ada", "On"));
+        if (FeatureFlags.NvidiaFeatures && vm.GetDlssg2030Installed(gn, gs))                                              exSummaryEntries.Add(("20/30 FG", "On"));
         if (card.IsOsInstalled)                                                             exSummaryEntries.Add(("OptiScaler", card.OsInstalledVersion));
-        if (!string.IsNullOrEmpty(vm.GetDeInstalledAs(gn, gs)))                            exSummaryEntries.Add(("DLSS Enabler", "On"));
+        if (FeatureFlags.NvidiaFeatures && !string.IsNullOrEmpty(vm.GetDeInstalledAs(gn, gs)))                            exSummaryEntries.Add(("DLSS Enabler", "On"));
         if (card.IsDxvkInstalled)                                                           exSummaryEntries.Add(("DXVK", card.DxvkInstalledVersion ?? "On"));
         if (dgvInstalled)                                                                   exSummaryEntries.Add(("dgVoodoo2", vm.GetDgVoodooVersion(gn, gs) ?? _window.ViewModel.Manifest?.DgVoodooVersions?.Keys.FirstOrDefault()));
         var exSummary = DetailPanelBuilder.MakeSectionSummaryInlines(exSummaryEntries);
@@ -108,33 +108,36 @@ public partial class DetailPanelBuilder
         BuildOsRow(card, exBody);
         CrashReporter.Log($"[BuildExtrasSection] OsRow: {__exSw.ElapsedMilliseconds - __t0}ms '{card.GameName}'");
 
-        // ── MFG Unlocks separator ─────────────────────────────────────────────
-        exBody.Children.Add(MakeExtrasSeparator("MFG Unlocks"));
+        if (FeatureFlags.NvidiaFeatures)
+        {
+            // ── MFG Unlocks separator ─────────────────────────────────────────────
+            exBody.Children.Add(MakeExtrasSeparator("MFG Unlocks"));
 
-        // ── RTX Encore row ────────────────────────────────────────────────────
-        __t0 = __exSw.ElapsedMilliseconds;
-        BuildRtxEncoreRow(card, exBody);
-        CrashReporter.Log($"[BuildExtrasSection] RtxEncoreRow: {__exSw.ElapsedMilliseconds - __t0}ms '{card.GameName}'");
+            // ── RTX Encore row ────────────────────────────────────────────────────
+            __t0 = __exSw.ElapsedMilliseconds;
+            BuildRtxEncoreRow(card, exBody);
+            CrashReporter.Log($"[BuildExtrasSection] RtxEncoreRow: {__exSw.ElapsedMilliseconds - __t0}ms '{card.GameName}'");
 
-        // ── DLSS Enabler (standalone) row ─────────────────────────────────────
-        __t0 = __exSw.ElapsedMilliseconds;
-        BuildDlssEnablerRow(card, exBody);
-        CrashReporter.Log($"[BuildExtrasSection] DlssEnablerRow: {__exSw.ElapsedMilliseconds - __t0}ms '{card.GameName}'");
+            // ── DLSS Enabler (standalone) row ─────────────────────────────────────
+            __t0 = __exSw.ElapsedMilliseconds;
+            BuildDlssEnablerRow(card, exBody);
+            CrashReporter.Log($"[BuildExtrasSection] DlssEnablerRow: {__exSw.ElapsedMilliseconds - __t0}ms '{card.GameName}'");
 
-        // ── 20/30 FG Unlock row ───────────────────────────────────────────────
-        __t0 = __exSw.ElapsedMilliseconds;
-        BuildDlssg2030Row(card, exBody);
-        CrashReporter.Log($"[BuildExtrasSection] Dlssg2030Row: {__exSw.ElapsedMilliseconds - __t0}ms '{card.GameName}'");
+            // ── 20/30 FG Unlock row ───────────────────────────────────────────────
+            __t0 = __exSw.ElapsedMilliseconds;
+            BuildDlssg2030Row(card, exBody);
+            CrashReporter.Log($"[BuildExtrasSection] Dlssg2030Row: {__exSw.ElapsedMilliseconds - __t0}ms '{card.GameName}'");
 
-        // ── RTX 40 MFG Unlock row ─────────────────────────────────────────────
-        __t0 = __exSw.ElapsedMilliseconds;
-        BuildRtx40MfgRow(card, exBody);
-        CrashReporter.Log($"[BuildExtrasSection] Rtx40MfgRow: {__exSw.ElapsedMilliseconds - __t0}ms '{card.GameName}'");
+            // ── RTX 40 MFG Unlock row ─────────────────────────────────────────────
+            __t0 = __exSw.ElapsedMilliseconds;
+            BuildRtx40MfgRow(card, exBody);
+            CrashReporter.Log($"[BuildExtrasSection] Rtx40MfgRow: {__exSw.ElapsedMilliseconds - __t0}ms '{card.GameName}'");
 
-        // ── MFG Ada Unlock row ────────────────────────────────────────────────
-        __t0 = __exSw.ElapsedMilliseconds;
-        BuildMfgAdaUnlockRow(card, exBody);
-        CrashReporter.Log($"[BuildExtrasSection] MfgAdaRow: {__exSw.ElapsedMilliseconds - __t0}ms '{card.GameName}'");
+            // ── MFG Ada Unlock row ────────────────────────────────────────────────
+            __t0 = __exSw.ElapsedMilliseconds;
+            BuildMfgAdaUnlockRow(card, exBody);
+            CrashReporter.Log($"[BuildExtrasSection] MfgAdaRow: {__exSw.ElapsedMilliseconds - __t0}ms '{card.GameName}'");
+        }
 
         // ── API Upgrades sub-header + DXVK row ────────────────────────────────
         if (card.IsDxvkToggleVisible)

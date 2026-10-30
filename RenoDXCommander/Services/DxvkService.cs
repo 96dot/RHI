@@ -17,16 +17,13 @@ public partial class DxvkService : IDxvkService
 
     // Separate staging directories for each variant (coexist simultaneously)
     private static readonly string StagingDirDevelopment = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "dxvk-development");
+        AppPaths.DataRoot, "dxvk-development");
 
     private static readonly string StagingDirStable = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "dxvk-stable");
+        AppPaths.DataRoot, "dxvk-stable");
 
     private static readonly string StagingDirLilium = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "dxvk-lilium");
+        AppPaths.DataRoot, "dxvk-lilium");
 
     /// <summary>
     /// The active staging directory — resolves based on the currently selected variant.
@@ -35,8 +32,7 @@ public partial class DxvkService : IDxvkService
     private string StagingDir => GetStagingDirForVariant(_selectedVariant);
 
     private static readonly string DbPath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "dxvk_installed.json");
+        AppPaths.DataRoot, "dxvk_installed.json");
 
     private static readonly string ConfTemplatePath = Path.Combine(
         AuxInstallService.InisDir, "dxvk.conf");

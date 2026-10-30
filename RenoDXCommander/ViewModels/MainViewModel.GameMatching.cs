@@ -14,7 +14,7 @@ public partial class MainViewModel
     private static readonly ConcurrentDictionary<string, (GraphicsApiType Primary, HashSet<GraphicsApiType> All)> _gameApiCache = new(StringComparer.OrdinalIgnoreCase);
 
     private static string GameApiCachePath => Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RHI", "game_api_cache.json");
+        AppPaths.DataRoot, "game_api_cache.json");
 
     internal static void LoadGameApiCache()
     {

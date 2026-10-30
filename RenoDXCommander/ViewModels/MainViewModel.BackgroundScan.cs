@@ -1012,8 +1012,7 @@ public partial class MainViewModel
         try
         {
             var legacyDir = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "RHI", "dxvk");
+                AppPaths.DataRoot, "dxvk");
             var legacyVersionFile = Path.Combine(legacyDir, "version.txt");
             var legacyX64 = Path.Combine(legacyDir, "x64");
 

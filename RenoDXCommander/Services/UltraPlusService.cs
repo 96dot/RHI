@@ -16,8 +16,7 @@ public partial class UltraPlusService : IUltraPlusService
     private const string GamesPageUrl = "https://theultraplace.com/games/";
 
     private static readonly string CachePath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "ultraplus_games.html");
+        AppPaths.DataRoot, "ultraplus_games.html");
 
     private static readonly TimeSpan CacheTtl = TimeSpan.FromHours(24);
 

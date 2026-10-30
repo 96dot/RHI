@@ -9,8 +9,7 @@ namespace RenoDXCommander.Services;
 public static class SettingsFile
 {
     public static readonly string FilePath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "settings.json");
+        AppPaths.DataRoot, "settings.json");
 
     private static object Lock => SafeJsonFile.LockFor(FilePath);
 

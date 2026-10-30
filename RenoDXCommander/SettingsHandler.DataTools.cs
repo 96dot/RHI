@@ -179,8 +179,7 @@ public partial class SettingsHandler
         try
         {
             var logsDir = Path.Combine(
-                Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-                "RHI", "logs");
+                AppPaths.DataRoot, "logs");
             if (!Directory.Exists(logsDir))
             {
                 CrashReporter.Log("[SettingsHandler.CopyLogsArchive_Click] Logs directory does not exist");
@@ -247,7 +246,7 @@ public partial class SettingsHandler
 
             int filesDeleted = 0;
             long bytesFreed = 0;
-            var rhiRoot = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RHI");
+            var rhiRoot = Path.Combine(AppPaths.DataRoot);
 
             // Folders to purge completely (delete all contents, keep folder)
             var foldersToClean = new[]

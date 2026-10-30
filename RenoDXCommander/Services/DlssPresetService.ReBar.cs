@@ -390,6 +390,7 @@ $session.Save()
     /// <summary>Sets ReBAR via an elevated process that re-invokes NVAPI with admin rights.</summary>
     private bool SetReBarElevated(string gameName, string installPath, bool enabled, uint mode)
     {
+        if (!_isSupported) return false;
         try
         {
             // Resolve the actual NVIDIA profile name (may differ from RHI game name)

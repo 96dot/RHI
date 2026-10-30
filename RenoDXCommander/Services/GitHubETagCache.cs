@@ -17,8 +17,7 @@ public class GitHubETagCache
     private readonly ConcurrentDictionary<string, (string etag, string body)> _cache = new();
 
     private static readonly string CachePath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "github_etag_cache.json");
+        AppPaths.DataRoot, "github_etag_cache.json");
 
     private static readonly TimeSpan MaxAge = TimeSpan.FromDays(30);
     private static readonly TimeSpan ApiTimeout = TimeSpan.FromSeconds(30);

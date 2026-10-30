@@ -51,6 +51,12 @@ public class UpdateService : IUpdateService
     /// </summary>
     public async Task<UpdateInfo?> CheckForUpdateAsync(bool betaOptIn = false)
     {
+        // Portable fork: upstream releases ship the installer with NVIDIA features, so never offer them.
+        if (!FeatureFlags.NvidiaFeatures)
+        {
+            CrashReporter.Log("[UpdateService.CheckForUpdateAsync] Self-update disabled in this portable fork");
+            return null;
+        }
         try
         {
             // Always fetch the stable release — try /releases/latest first, then tag-based fallbacks

@@ -12,8 +12,7 @@ namespace RenoDXCommander;
 public static class PresetPopupHelper
 {
     public static readonly string PresetsDir = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "inis", "reshade-presets");
+        AppPaths.DataRoot, "inis", "reshade-presets");
 
     /// <summary>
     /// Shows the preset selection popup.

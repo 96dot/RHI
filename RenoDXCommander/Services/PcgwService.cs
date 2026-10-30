@@ -154,25 +154,20 @@ public class PcgwService : IPcgwService
     private readonly IGameDetectionService _gameDetection;
 
     private static readonly string CachePath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "steam_appid_cache.json");
+        AppPaths.DataRoot, "steam_appid_cache.json");
 
     private static readonly string UrlCachePath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "pcgw_url_cache.json");
+        AppPaths.DataRoot, "pcgw_url_cache.json");
 
     /// <summary>Marker file — if absent on first 2.4.2 launch, wipes the stale URL cache built with broken appid.php URLs.</summary>
     private static readonly string UrlCacheMarkerPath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "pcgw_cache_v2.txt");
+        AppPaths.DataRoot, "pcgw_cache_v2.txt");
 
     private static readonly string CentralETagPath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "pcgw_central_etag.txt");
+        AppPaths.DataRoot, "pcgw_central_etag.txt");
 
     private static readonly string CentralCachePath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "pcgw_central_cache.json");
+        AppPaths.DataRoot, "pcgw_central_cache.json");
 
     private const string CentralDataUrl =
         "https://raw.githubusercontent.com/RankFTW/RHI/main/database/pcgw_data.json";
@@ -822,14 +817,12 @@ public class PcgwService : IPcgwService
     // ── PCGW API info scraping ────────────────────────────────────────────────
 
     private static readonly string ApiCachePath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "pcgw_api_cache.json");
+        AppPaths.DataRoot, "pcgw_api_cache.json");
 
     /// <summary>Bump when ParseApiSection or ParseConfigFilesSection logic changes to force a full rescrape.</summary>
     private const int ApiCacheVersion = 16;
     private static readonly string ApiCacheVersionPath = Path.Combine(
-        Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData),
-        "RHI", "pcgw_api_cache_v.txt");
+        AppPaths.DataRoot, "pcgw_api_cache_v.txt");
 
     /// <summary>Normalized game name → scraped API info. Loaded/saved to pcgw_api_cache.json.</summary>
     private Dictionary<string, PcgwApiInfo> _apiInfoCache = new(StringComparer.Ordinal);

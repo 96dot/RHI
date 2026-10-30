@@ -374,7 +374,7 @@ public partial class MainViewModel
                             {
                                 // Test dump — separate folder, no pruning, no pending marker, never suppressed
                                 dumpDir  = System.IO.Path.Combine(
-                                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RHI", "test_dumps");
+                                    AppPaths.DataRoot, "test_dumps");
                                 System.IO.Directory.CreateDirectory(dumpDir);
                                 dumpPath = System.IO.Path.Combine(dumpDir, $"test_{dumpTs}.dmp");
                                 CrashReporter.LogSync($"[Heartbeat.Dump] Writing TEST minidump to '{dumpPath}'...");
@@ -383,7 +383,7 @@ public partial class MainViewModel
                             {
                                 // Real freeze dump — keep last 3, no skip
                                 dumpDir  = System.IO.Path.Combine(
-                                    Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RHI", "dumps");
+                                    AppPaths.DataRoot, "dumps");
                                 System.IO.Directory.CreateDirectory(dumpDir);
                                 dumpPath = System.IO.Path.Combine(dumpDir, $"freeze_{dumpTs}.dmp");
 
@@ -397,7 +397,7 @@ public partial class MainViewModel
 
                                 var timestamp = DateTime.UtcNow.ToString("yyyy-MM-dd HH:mm:ss UTC");
                                 CrashReporter.LogSync($"[Heartbeat.Dump] Writing minidump at {timestamp} to '{dumpPath}'...");
-                                var pendingMarker = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RHI", "rhi_pending_dump");
+                                var pendingMarker = System.IO.Path.Combine(AppPaths.DataRoot, "rhi_pending_dump");
                                 try { System.IO.File.WriteAllText(pendingMarker, dumpPath); } catch { }
                             }
 
@@ -426,14 +426,14 @@ public partial class MainViewModel
                                     CrashReporter.LogSync($"[Heartbeat.Dump] {(isTest ? "Test" : "Real")} minidump written ({sizeMb} MB) — '{dumpPath}'");
                                     if (!isTest)
                                     {
-                                        var pendingMarker2 = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RHI", "rhi_pending_dump");
+                                        var pendingMarker2 = System.IO.Path.Combine(AppPaths.DataRoot, "rhi_pending_dump");
                                         try { System.IO.File.WriteAllText(pendingMarker2, $"{dumpPath}|{sizeMb}MB"); } catch { }
                                     }
                                 }
                                 else
                                 {
                                     CrashReporter.LogSync($"[Heartbeat.Dump] MiniDumpWriteDump failed — Win32 error {System.Runtime.InteropServices.Marshal.GetLastWin32Error()}");
-                                    if (!isTest) { var pendingMarker3 = System.IO.Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RHI", "rhi_pending_dump"); try { System.IO.File.Delete(pendingMarker3); } catch { } }
+                                    if (!isTest) { var pendingMarker3 = System.IO.Path.Combine(AppPaths.DataRoot, "rhi_pending_dump"); try { System.IO.File.Delete(pendingMarker3); } catch { } }
                                 }
                             }
                             finally { if (snapshotHandle != IntPtr.Zero) NativeInterop.PssFreeSnapshot(hProcess, snapshotHandle); }
@@ -495,7 +495,7 @@ public partial class MainViewModel
 
                         // Loop guard
                         var restartLogPath = System.IO.Path.Combine(
-                            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RHI", "restart_log.txt");
+                            AppPaths.DataRoot, "restart_log.txt");
                         var now = DateTime.UtcNow;
                         var recentRestarts = 0;
                         try
@@ -518,7 +518,7 @@ public partial class MainViewModel
 
                         try { System.IO.File.AppendAllText(restartLogPath, now.ToString("O") + Environment.NewLine); } catch { }
                         var uncleanMarkerPath = System.IO.Path.Combine(
-                            Environment.GetFolderPath(Environment.SpecialFolder.LocalApplicationData), "RHI", "rhi_unclean_restart");
+                            AppPaths.DataRoot, "rhi_unclean_restart");
                         try { System.IO.File.WriteAllText(uncleanMarkerPath, now.ToString("O")); } catch { }
 
                         CrashReporter.LogSync($"[Heartbeat.Restart] Restarting RHI — {(isKnownSignature ? "known-signature fast" : "slow")} path, restart #{recentRestarts + 1} in 5-min window");
