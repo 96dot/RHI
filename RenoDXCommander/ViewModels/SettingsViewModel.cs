@@ -109,11 +109,11 @@ public partial class SettingsViewModel : ObservableObject
     // ── Detail panel section order ────────────────────────────────────────────
     /// <summary>
     /// Ordered list of section keys for the detail panel.
-    /// Default order: Components, GameOverrides, NeuralRendering, NvidiaProfileDlss, NvidiaProfileDriver, Management.
+    /// Default order: Components, Extras, GameOverrides, NeuralRendering, NvidiaProfileDlss, NvidiaProfileDriver, Management.
     /// Absent or incomplete = use default order.
     /// </summary>
     public static readonly IReadOnlyList<string> DefaultSectionOrder = new[]
-        { "Components", "GameOverrides", "NeuralRendering", "NvidiaProfileDlss", "NvidiaProfileDriver", "Management", "Extras" };
+        { "Components", "Extras", "GameOverrides", "NeuralRendering", "NvidiaProfileDlss", "NvidiaProfileDriver", "Management" };
 
     public List<string> DetailSectionOrder { get; set; } = new(DefaultSectionOrder);
 
